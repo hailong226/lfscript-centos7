@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tar -xf tcl-core8.6.4-src.tar.gz && cd tcl-core8.6.4-src
+tar -xf tcl-core8.6.4-src.tar.gz && cd tcl8.6.4/unix/
 
 ./configure --prefix=/tools
 

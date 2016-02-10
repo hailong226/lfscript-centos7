@@ -1,47 +1,47 @@
 #!/bin/bash
 
+workdir=`cd $(dirname $0) && pwd`
+
 sh format-partitions.sh
 sh source.sh
 
 mkdir -pv $LFS/tools && ln -sv $LFS/tools /
 
-# export MAKEFLAGS='-j 2'
+export MAKEFLAGS='-j 2'
+export LFS_TGT=$(uname -m)-lfs-linux-gnu
+export PATH=/tools/bin:/bin:/usr/bin
 
 cd $LFS/sources
-tar -jxf binutils-2.25.1.tar.bz2 && cd binutils-2.25.1
-export LFS_TGT=`./config.guess`
-cd $LFS/sources
+sh $workdir/build-binutils.sh
+sh $workdir/build-gcc.sh
+sh $workdir/build-api-headers.sh
+sh $workdir/build-glibc.sh
+sh $workdir/build-libstdc++.sh
 
-sh build-binutils.sh
-sh build-gcc.sh
-sh build-api-headers.sh
-sh build-glibc.sh
-sh build-libstdc++.sh
-
-sh build-binutils-pass2.sh
-sh build-gcc-pass2.sh
-sh build-tcl-core.sh
-sh build-expect.sh
-sh build-deja-gnu.sh
-sh build-check.sh
-sh build-ncurses.sh
-sh build-bash.sh
-sh build-bzip2.sh
-sh build-coreutils.sh
-sh build-diffutils.sh
-sh build-file.sh
-sh build-findutils.sh
-sh build-gawk.sh
-sh build-gettext.sh
-sh build-grep.sh
-sh build-gzip.sh
-sh build-m4.sh
-sh build-make.sh
-sh build-patch.sh
-sh build-perl.sh
-sh build-sed.sh
-sh build-tar.sh
-sh build-texinfo.sh
-sh build-util-linux.sh
-sh build-xz.sh
-sh build-stripping.sh
+sh $workdir/build-binutils-pass2.sh
+sh $workdir/build-gcc-pass2.sh
+sh $workdir/build-tcl-core.sh
+sh $workdir/build-expect.sh
+sh $workdir/build-deja-gnu.sh
+sh $workdir/build-check.sh
+sh $workdir/build-ncurses.sh
+sh $workdir/build-bash.sh
+sh $workdir/build-bzip2.sh
+sh $workdir/build-coreutils.sh
+sh $workdir/build-diffutils.sh
+sh $workdir/build-file.sh
+sh $workdir/build-findutils.sh
+sh $workdir/build-gawk.sh
+sh $workdir/build-gettext.sh
+sh $workdir/build-grep.sh
+sh $workdir/build-gzip.sh
+sh $workdir/build-m4.sh
+sh $workdir/build-make.sh
+sh $workdir/build-patch.sh
+sh $workdir/build-perl.sh
+sh $workdir/build-sed.sh
+sh $workdir/build-tar.sh
+sh $workdir/build-texinfo.sh
+sh $workdir/build-util-linux.sh
+sh $workdir/build-xz.sh
+sh $workdir/build-stripping.sh

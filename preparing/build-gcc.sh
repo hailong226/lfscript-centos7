@@ -31,7 +31,7 @@ cd ../gcc-build
 ../gcc-5.2.0/configure                             \
     --target=$LFS_TGT                              \
     --prefix=/tools                                \
-    --with-glibc-version=2.17                      \
+    --with-glibc-version=2.11                      \
     --with-sysroot=$LFS                            \
     --with-newlib                                  \
     --without-headers                              \

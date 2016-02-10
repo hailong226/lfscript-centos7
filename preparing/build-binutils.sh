@@ -1,5 +1,7 @@
 #!/bin/bash
 
+tar -jxf binutils-2.25.1.tar.bz2
+
 mkdir -pv binutils-build && cd binutils-build
 
 ../binutils-2.25.1/configure --prefix=/tools \
