@@ -5,7 +5,12 @@ export LC_ALL=C
 sh --version | head -n1 | cut -d" " -f2-4
 echo "/bin/sh -> `readlink -f /bin/sh`"
 echo -n "Binutils: "; ld --version | head -n1 | cut -d" " -f3-
-bison --version | head -n1
+
+if [ -x /usr/bin/bison ]; then
+  bison --version | head -n1
+else
+  yum install -y bison.x86_64
+fi
 
 if [ -h /usr/bin/yacc ]; then
   echo "/usr/bin/yacc -> `readlink -f /usr/bin/yacc`";
@@ -122,6 +127,12 @@ else
   yum install -y xz.x86_64
 fi
 
+if [ -x /usr/bin/wget ]; then
+ wget --version | head -n1 
+else
+  yum install -y wget.x86_64
+fi
+
 echo 'int main(){}' > dummy.c && g++ -o dummy dummy.c
 if [ -x dummy ]; then
   echo "g++ compilation OK";
@@ -129,3 +140,8 @@ else
   echo "g++ compilation failed";
 fi
 rm -f dummy.c dummy
+
+for lib in lib{gmp,mpfr,mpc}.so; do
+  echo $lib: $(if find /usr/lib* -name $lib* | grep -q $lib;then :;else echo not;fi) found
+done
+unset lib

@@ -1,0 +1,7 @@
+#!/bin/bash
+workdir=`cd $(dirname $0) && pwd`
+
+export LFS=/mnt/lfs
+
+cd $workdir/preinstall && ./start
+cd $workdir/preparing && ./start

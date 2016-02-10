@@ -1,0 +1,17 @@
+#!/bin/bash
+
+tar -xf tcl-core8.6.4-src.tar.gz && cd tcl-core8.6.4-src
+
+./configure --prefix=/tools
+
+make
+
+TZ=UTC make test
+
+make install
+
+chmod -v u+w /tools/lib/libtcl8.6.so
+
+make install-private-headers
+
+ln -sv tclsh8.6 /tools/bin/tclsh
