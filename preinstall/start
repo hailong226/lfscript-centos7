@@ -1,0 +1,131 @@
+#!/bin/bash
+
+# Simple script to list version numbers of critical development tools
+export LC_ALL=C
+sh --version | head -n1 | cut -d" " -f2-4
+echo "/bin/sh -> `readlink -f /bin/sh`"
+echo -n "Binutils: "; ld --version | head -n1 | cut -d" " -f3-
+bison --version | head -n1
+
+if [ -h /usr/bin/yacc ]; then
+  echo "/usr/bin/yacc -> `readlink -f /usr/bin/yacc`";
+elif [ -x /usr/bin/yacc ]; then
+  echo yacc is `/usr/bin/yacc -V | head -n1`
+else
+  echo "install yacc."
+  yum install -y byacc.x86_64
+fi
+
+if [ -x /usr/bin/bzip2 ]; then
+  bzip2 --version 2>&1 < /dev/null | head -n1 | cut -d" " -f1,6-
+else
+  yum install -y bzip2.x86_64
+fi
+
+echo -n "Coreutils: "; chown --version | head -n1 | cut -d")" -f2
+diff --version | head -n1
+find --version | head -n1
+
+if [ -h /usr/bin/gawk ]; then
+  echo "/usr/bin/gawk -> `readlink -f /usr/bin/gawk`"
+elif [ -x /usr/bin/gawk ]; then
+  gawk --version | head -n1
+else
+  yum install -y gawk.x86_64
+fi
+
+if [ -h /usr/bin/awk ]; then
+  echo "/usr/bin/awk -> `readlink -f /usr/bin/awk`";
+elif [ -x /usr/bin/awk ]; then
+  echo awk is `/usr/bin/awk --version | head -n1`
+else
+  ln -sv /usr/bin/gawk /usr/bin/awk
+fi
+
+if [ -x /usr/bin/gcc ]; then
+  gcc --version | head -n1
+else
+  yum install -y gcc.x86_64
+fi
+
+if [ -x /usr/bin/g++ ]; then
+  g++ --version | head -n1
+else
+  yum install -y gcc-c++.x86_64
+fi
+
+if [ -x /usr/bin/ldd ]; then
+  ldd --version | head -n1 | cut -d" " -f2-  # glibc version
+else
+  yum install -y glibc.x86_64
+fi
+
+if [ -x /usr/bin/grep ]; then
+  grep --version | head -n1
+else
+  yum install -y grep.x86_64
+fi
+
+if [ -x /usr/bin/gzip ]; then
+  gzip --version | head -n1
+else
+  yum install -y gzip.x86_64
+fi
+
+cat /proc/version
+
+if [ -x /usr/bin/m4 ]; then
+  m4 --version | head -n1
+else
+  yum install -y m4.x86_64
+fi
+
+if [ -x /usr/bin/make ]; then
+  make --version | head -n1
+else
+  yum install -y make.x86_64
+fi
+
+if [ -x /usr/bin/patch ]; then
+  patch --version | head -n1
+else
+  yum install -y patch.x86_64
+fi
+
+if [ -x /usr/bin/perl ]; then
+  echo Perl `perl -V:version`
+else
+  yum install -y perl.x86_64
+fi
+
+if [ -x /usr/bin/sed ]; then
+  sed --version | head -n1
+else
+  yum install -y sed.x86_64
+fi
+
+if [ -x /usr/bin/tar ]; then
+  tar --version | head -n1
+else
+  yum install -y tar.x86_64
+fi
+
+if [ -x /usr/bin/makeinfo ]; then
+  makeinfo --version | head -n1
+else
+  yum install -y texinfo.x86_64
+fi
+
+if [ -x /usr/bin/xz ]; then
+  xz --version | head -n1
+else
+  yum install -y xz.x86_64
+fi
+
+echo 'int main(){}' > dummy.c && g++ -o dummy dummy.c
+if [ -x dummy ]; then
+  echo "g++ compilation OK";
+else
+  echo "g++ compilation failed";
+fi
+rm -f dummy.c dummy
