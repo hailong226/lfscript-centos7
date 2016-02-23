@@ -1,0 +1,79 @@
+#!/bin/bash
+
+export LFS=/mnt/lfs
+
+sh filesystem.sh
+sh chroot.sh
+
+# after chroot 
+sh directories.sh
+
+touch /var/log/{btmp,lastlog,wtmp}
+chgrp -v utmp /var/log/lastlog
+chmod -v 664  /var/log/lastlog
+chmod -v 600  /var/log/btmp
+
+sh build-api-headers.sh
+sh build-man-pages.sh
+sh build-glibc.sh
+sh adjusting.sh
+sh build-zlib.sh
+sh build-file.sh
+sh build-binutils.sh
+sh build-gmp.sh
+sh build-mpfr.sh
+sh build-mpc.sh
+sh build-gcc.sh
+sh build-bzip2.sh
+sh build-pkg-config.sh
+sh build-ncurses.sh
+sh build-attr.sh
+sh build-acl.sh
+sh build-libcap.sh
+sh build-sed.sh
+sh build-shadow.sh
+sh build-psmisc.sh
+sh build-procps-ng.sh
+sh build-e2fsprogs.sh
+sh build-coreutils.sh
+sh build-iana-etc.sh
+sh build-m4.sh
+sh build-flex.sh
+sh build-bison.sh
+sh build-grep.sh
+sh build-readline.sh
+sh build-bash.sh
+sh build-bc.sh
+sh build-libtool.sh
+sh build-gdbm.sh
+sh build-expat.sh
+sh build-inetutils.sh
+sh build-perl.sh
+sh build-xml-parser.sh
+sh build-autoconf.sh
+sh build-automake.sh
+sh build-diffutils.sh
+sh build-gawk.sh
+sh build-findutils.sh
+sh build-gettext.sh
+sh build-intltool.sh
+sh build-gperf.sh
+sh build-groff.sh
+sh build-xz.sh
+sh build-grub.sh
+sh build-less.sh
+sh build-gzip.sh
+sh build-iproute2.sh
+sh build-kbd.sh
+sh build-kmod.sh
+sh build-libpipeline.sh
+sh build-make.sh
+sh build-patch.sh
+sh build-sysklogd.sh
+sh build-sysvinit.sh
+sh build-tar.sh
+sh build-texinfo.sh
+sh build-eudev.sh
+sh build-util-linux.sh
+sh build-man-db.sh
+sh build-vim.sh

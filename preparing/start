@@ -1,14 +1,15 @@
 #!/bin/bash
 
 workdir=`cd $(dirname $0) && pwd`
+export LFS=/mnt/lfs
+export MAKEFLAGS='-j 2'
+export LFS_TGT=$(uname -m)-lfs-linux-gnu
 
 sh format-partitions.sh
 sh source.sh
 
 mkdir -pv $LFS/tools && ln -sv $LFS/tools /
 
-export MAKEFLAGS='-j 2'
-export LFS_TGT=$(uname -m)-lfs-linux-gnu
 export PATH=/tools/bin:/bin:/usr/bin
 
 cd $LFS/sources

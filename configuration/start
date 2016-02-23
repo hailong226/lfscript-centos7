@@ -1,0 +1,5 @@
+#!/bin/bash
+
+tar -jxf lfs-bootscripts-20150222.tar.bz2 && cd lfs-bootscripts-20150222/
+
+make install
